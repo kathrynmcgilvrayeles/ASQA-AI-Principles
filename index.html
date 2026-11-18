@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASQA Responsible AI Principles in VET</title>
+    <title>ASQA Responsible AI Principles & Case Studies in VET</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Import Inter font for a clean, modern look */
@@ -30,7 +30,7 @@
         }
 
         .main-container {
-            max-width: 1040px;
+            max-width: 1120px;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -48,24 +48,27 @@
         .nav-column {
             display: flex;
             flex-direction: row;
-            gap: 0.85rem;
+            gap: 0.75rem;
             overflow-x: auto;
-            padding-bottom: 0.5rem;
+            padding: 0.25rem 0.25rem 0.75rem 0.25rem;
+            scrollbar-width: thin;
         }
 
         @media (min-width: 768px) {
             .nav-column {
                 flex-direction: column;
                 overflow-x: visible;
-                padding-bottom: 0;
-                width: 110px;
+                padding: 0;
+                width: 105px;
                 flex-shrink: 0;
+                align-items: center;
+                justify-content: space-between;
             }
         }
 
         .circle-btn {
-            width: 80px;
-            height: 80px;
+            width: 78px;
+            height: 78px;
             border-radius: 50%;
             background-color: #1f2a52; /* Midnight Blue */
             color: #ffffff;
@@ -76,16 +79,18 @@
             text-align: center;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(31, 42, 82, 0.15);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             flex-shrink: 0;
             border: 3px solid transparent;
+            position: relative;
+            user-select: none;
         }
 
         .circle-btn svg.nav-icon {
-            width: 26px;
-            height: 26px;
-            margin-bottom: 3px;
-            transition: transform 0.3s ease;
+            width: 24px;
+            height: 24px;
+            margin-bottom: 2px;
+            transition: transform 0.25s ease;
         }
 
         .circle-btn:hover svg.nav-icon {
@@ -93,7 +98,7 @@
         }
 
         .circle-btn span.label {
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             font-weight: 600;
             margin-top: 1px;
             padding: 0 4px;
@@ -109,8 +114,32 @@
         .circle-btn.active {
             background-color: #00bec7; /* Teal */
             border-color: #d2f0f0;
-            transform: scale(1.05);
+            transform: scale(1.06);
             box-shadow: 0 8px 20px rgba(0, 190, 199, 0.4);
+        }
+
+        .visited-badge {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #e72582;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            border: 2px solid #ffffff;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.25s ease;
+        }
+
+        .circle-btn.visited .visited-badge {
+            opacity: 1;
+            transform: scale(1);
         }
 
         /* Content Card */
@@ -118,37 +147,55 @@
             flex-grow: 1;
             background-color: #ffffff;
             border-radius: 1.5rem;
-            padding: 2.25rem;
+            padding: 2rem;
             box-shadow: 0 15px 35px rgba(31, 42, 82, 0.08);
             border: 2px solid #d2f0f0;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            min-height: 520px;
+            min-height: 580px;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .content-box {
+                padding: 2.5rem;
+            }
         }
 
         .content-title {
             color: #e72582; /* Pink */
-            font-size: 1.65rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            line-height: 1.25;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            .content-title {
+                font-size: 1.65rem;
+            }
         }
 
         .content-desc {
-            font-size: 1.05rem;
+            font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 1.5rem;
             flex-grow: 1;
         }
 
         .content-meta {
-            font-size: 0.85rem;
-            color: #abb5bf; /* Slate Grey */
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #d2f0f0;
+            font-size: 0.82rem;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            padding: 0.75rem 1rem;
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            border-left: 4px solid #1f2a52;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .action-buttons-wrapper {
@@ -156,21 +203,31 @@
             flex-wrap: wrap;
             gap: 0.75rem;
             align-items: center;
+            justify-content: space-between;
+            padding-top: 0.5rem;
+            border-top: 1px solid #d2f0f0;
+        }
+
+        .modal-triggers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
         }
 
         .examples-btn {
             background-color: #00bec7; /* Teal */
             color: white;
             font-weight: 600;
-            padding: 0.75rem 1.4rem;
-            border-radius: 9999px; /* Pill shape */
+            padding: 0.7rem 1.3rem;
+            border-radius: 9999px;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.25s, transform 0.2s, box-shadow 0.25s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
+            box-shadow: 0 4px 12px rgba(0, 190, 199, 0.25);
         }
 
         .examples-btn:hover {
@@ -182,33 +239,82 @@
             background-color: #1f2a52; /* Midnight Blue */
             color: white;
             font-weight: 600;
-            padding: 0.75rem 1.4rem;
+            padding: 0.7rem 1.3rem;
             border-radius: 9999px;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.25s, transform 0.2s, box-shadow 0.25s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
+            box-shadow: 0 4px 12px rgba(31, 42, 82, 0.2);
         }
 
         .questions-btn:hover {
             background-color: #e72582; /* Pink */
             transform: translateY(-2px);
         }
+
+        .case-btn {
+            background-color: #e72582; /* Pink */
+            color: white;
+            font-weight: 600;
+            padding: 0.7rem 1.3rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.25s, transform 0.2s, box-shadow 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.88rem;
+            box-shadow: 0 4px 12px rgba(231, 37, 130, 0.25);
+        }
+
+        .case-btn:hover {
+            background-color: #1f2a52;
+            transform: translateY(-2px);
+        }
         
         .box-icon-wrapper {
             background-color: #d2f0f0; /* Light Aqua */
             color: #00bec7; /* Teal */
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.25rem;
             box-shadow: 0 4px 10px rgba(0, 190, 199, 0.15);
+            flex-shrink: 0;
+        }
+
+        /* Step Navigation Buttons */
+        .step-nav-btn {
+            background-color: #f1f5f9;
+            color: #1f2a52;
+            font-weight: 600;
+            padding: 0.55rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+        }
+
+        .step-nav-btn:hover:not(:disabled) {
+            background-color: #d2f0f0;
+            border-color: #00bec7;
+            color: #1f2a52;
+        }
+
+        .step-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
         /* Modal Styles */
@@ -222,7 +328,7 @@
             z-index: 50;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
             padding: 1rem;
         }
 
@@ -234,13 +340,13 @@
         .modal-content {
             background-color: #ffffff;
             border-radius: 1.5rem;
-            padding: 2rem;
-            max-width: 680px;
+            padding: 1.75rem 2rem;
+            max-width: 740px;
             width: 100%;
             max-height: 88vh;
             overflow-y: auto;
             transform: scale(0.95);
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease;
             border: 4px solid #d2f0f0;
             position: relative;
         }
@@ -260,26 +366,44 @@
             border: none;
             transition: color 0.2s;
             line-height: 1;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close-btn:hover {
             color: #e72582;
+            background-color: #f8fafc;
         }
 
         .item-card {
             background-color: #f8fafc;
             border-left: 4px solid #00bec7;
             padding: 1.1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.9rem;
             border-radius: 0 0.75rem 0.75rem 0;
             display: flex;
             align-items: flex-start;
             gap: 0.85rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: background-color 0.2s;
         }
         
         .item-card.question-card {
             border-left-color: #e72582; /* Pink for questions */
+            cursor: pointer;
+        }
+
+        .item-card.question-card:hover {
+            background-color: #f1f5f9;
+        }
+
+        .item-card.question-card.checked {
+            background-color: #f0fdf4;
+            border-left-color: #00bec7;
         }
 
         .item-icon {
@@ -295,9 +419,28 @@
         .item-title {
             color: #1f2a52;
             display: block;
-            margin-bottom: 0.35rem;
-            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
             font-weight: 700;
+        }
+
+        /* Case Study Tab Button */
+        .case-tab-btn {
+            padding: 0.65rem 1.15rem;
+            border-radius: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 2px solid #e2e8f0;
+            background-color: #f8fafc;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        .case-tab-btn.active {
+            background-color: #1f2a52;
+            color: #ffffff;
+            border-color: #1f2a52;
         }
 
         /* Custom scrollbar for modal */
@@ -318,16 +461,32 @@
     <div class="main-container">
         
         <!-- Left: Circular Navigation -->
-        <div class="nav-column" id="nav-container">
+        <div class="nav-column" id="nav-container" role="navigation" aria-label="ASQA AI Guidance Modules">
             <!-- Buttons injected via JS -->
         </div>
 
         <!-- Right: Rectangular Content Box -->
         <div class="content-box">
-            <div id="box-icon-container" class="box-icon-wrapper">
-                <!-- Icon injected here -->
+            <!-- Top Header Row -->
+            <div class="flex items-center justify-between gap-4 mb-4">
+                <div class="flex items-center gap-3.5">
+                    <div id="box-icon-container" class="box-icon-wrapper">
+                        <!-- Icon injected here -->
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-xs uppercase tracking-widest text-[#00bec7] font-bold" id="box-kicker">OFFICIAL ASQA GUIDANCE</span>
+                            <span class="text-[11px] bg-[#d2f0f0] text-[#1f2a52] px-2.5 py-0.5 rounded-full font-semibold" id="progress-pill">1 of 7 Explored</span>
+                        </div>
+                        <p class="text-xs text-[#abb5bf] font-medium mt-0.5">Aligned with the Standards for RTOs</p>
+                    </div>
+                </div>
+                <a href="https://www.asqa.gov.au/for-providers/guidance-and-resources-providers/artificial-intelligence-ai-use-in-vocational-education-training-vet/responsible-use" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-[#1f2a52] hover:text-[#e72582] bg-[#f8fafc] hover:bg-[#d2f0f0]/50 border border-[#d2f0f0] px-3 py-1.5 rounded-full inline-flex items-center gap-1.5 transition-colors flex-shrink-0" title="Open Official ASQA AI Guidelines">
+                    <span>ASQA Guidelines</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
             </div>
-            <h1 class="text-xs uppercase tracking-widest text-[#abb5bf] mb-2 font-bold" id="box-kicker">OFFICIAL ASQA GUIDANCE 2026</h1>
+
             <h2 class="content-title" id="box-title">Principles for the Responsible Use of AI in VET</h2>
             
             <!-- Dynamic Content Area -->
@@ -335,27 +494,54 @@
                 <!-- Text injected here -->
             </div>
             
-            <p class="content-meta" id="box-meta"></p>
+            <div class="content-meta" id="box-meta">
+                <!-- Meta Standards mapping injected here -->
+            </div>
 
             <div class="action-buttons-wrapper">
-                <button id="btn-examples" class="examples-btn" style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-                    View RTO Examples
-                </button>
+                <div class="modal-triggers">
+                    <button id="btn-risks-opps" class="examples-btn" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        ASQA Risks & Opportunities
+                    </button>
 
-                <button id="btn-questions" class="questions-btn" style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                    Self-Assurance Questions
-                </button>
+                    <button id="btn-examples" class="examples-btn" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                        View RTO Examples
+                    </button>
+
+                    <button id="btn-questions" class="questions-btn" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Self-Assurance Questions
+                    </button>
+
+                    <button id="btn-asqa-trends" class="case-btn" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        ASQA IQ: AI in Regulatory Submissions
+                    </button>
+                </div>
+
+                <!-- Step Prev / Next Navigation -->
+                <div class="flex items-center gap-2 ml-auto">
+                    <button id="btn-prev" class="step-nav-btn" title="Previous Section">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        Prev
+                    </button>
+                    <button id="btn-next" class="step-nav-btn" title="Next Section">
+                        Next
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="modal-overlay" id="interactive-modal">
+    <!-- Interactive Modal -->
+    <div class="modal-overlay" id="interactive-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content">
-            <button class="close-btn" id="btn-close-modal">&times;</button>
-            <h3 class="text-2xl font-bold text-[#1f2a52] mb-1" id="modal-title">Details</h3>
-            <p class="text-sm text-[#abb5bf] mb-5" id="modal-subtitle">Practical guidance for RTO implementation</p>
+            <button class="close-btn" id="btn-close-modal" aria-label="Close modal">&times;</button>
+            <h3 class="text-xl md:text-2xl font-bold text-[#1f2a52] mb-1 pr-8" id="modal-title">Details</h3>
+            <p class="text-sm text-[#abb5bf] mb-5 font-medium" id="modal-subtitle">Practical guidance for RTO implementation</p>
             
             <div id="modal-body">
                 <!-- Content injected here -->
@@ -368,19 +554,69 @@
             {
                 id: 'start',
                 iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',
-                navLabel: 'Start',
-                title: 'Responsible Use of AI in VET',
+                navLabel: 'Overview',
+                title: 'Responsible Use of Artificial Intelligence (AI) in VET',
                 description: `
-                    <p class="mb-3 text-lg font-semibold text-[#1f2a52]">ASQA’s Principles guide providers towards safe, ethical, and effective AI integration.</p>
-                    <p class="mb-4 text-sm text-gray-700 leading-relaxed">The rapid uptake of AI is reshaping aspects of vocational education and training (VET) delivery. These principles do not introduce new regulatory requirements. Instead, they provide a structured way to interpret, implement, and oversee AI use within your existing obligations, including the 2025 Standards for RTOs.</p>
+                    <p class="mb-3 text-base md:text-lg font-semibold text-[#1f2a52]">ASQA’s 5 Principles guide providers towards safe, ethical, and effective AI integration.</p>
+                    <p class="mb-4 text-sm text-gray-700 leading-relaxed">Developed following sector-wide consultation, these principles do not introduce new regulatory requirements. Instead, they provide a structured way to interpret, implement, and oversee AI use within your existing obligations under the <strong>2025 Standards for RTOs</strong>.</p>
                     
-                    <div class="bg-[#d2f0f0]/60 p-4 rounded-xl border-l-4 border-[#00bec7]">
-                        <p class="text-sm font-semibold text-[#1f2a52] m-0">👉 Select a principle on the left to explore its requirements, view RTO examples, and access ASQA self-assurance audit questions.</p>
+                    <!-- Official ASQA Distinction: AI vs Automation -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-4">
+                        <div class="bg-[#f8fafc] p-3.5 rounded-xl border border-[#d2f0f0]">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#e72582]"></span>
+                                <h4 class="font-bold text-sm text-[#1f2a52]">What is an AI Tool?</h4>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed">AI tools <strong>interpret, analyse, and generate</strong> information. They work with complex or ambiguous inputs—for example, giving feedback on student writing, generating lesson materials, or summarising student questions.</p>
+                        </div>
+                        <div class="bg-[#f8fafc] p-3.5 rounded-xl border border-gray-200">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#00bec7]"></span>
+                                <h4 class="font-bold text-sm text-[#1f2a52]">What is Automation?</h4>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed">Automation tools follow <strong>predefined rules</strong> and do the same task the same way every time (e.g., auto-marking multiple-choice questions). There is no interpretation, learning, or decision-making beyond programmed rules.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#d2f0f0]/60 p-3.5 rounded-xl border-l-4 border-[#00bec7]">
+                        <p class="text-xs md:text-sm font-semibold text-[#1f2a52] m-0">👉 Explore the <strong>ASQA Risks & Opportunities</strong> below, or select a Principle or Official Case Study on the left.</p>
+                        <div class="mt-2.5 pt-2.5 border-t border-[#00bec7]/25 flex flex-wrap gap-4 text-xs">
+                            <a href="https://www.asqa.gov.au/for-providers/guidance-and-resources-providers/artificial-intelligence-ai-use-in-vocational-education-training-vet/responsible-use" target="_blank" rel="noopener noreferrer" class="font-bold text-[#1f2a52] hover:text-[#e72582] underline inline-flex items-center gap-1">
+                                Official ASQA Responsible Use of AI Guidelines ↗
+                            </a>
+                            <a href="https://www.asqa.gov.au/for-providers/guidance-and-resources-providers/artificial-intelligence-ai-use-in-vocational-education-training-vet/artificial-intelligence-ai-case-studies" target="_blank" rel="noopener noreferrer" class="font-bold text-[#1f2a52] hover:text-[#e72582] underline inline-flex items-center gap-1">
+                                Official ASQA AI Case Studies ↗
+                            </a>
+                        </div>
                     </div>
                 `,
-                meta: 'Guiding quality, compliance and integrity across VET delivery',
+                meta: 'Framework Context: 2025 Standards for RTOs | Official ASQA Guidance',
+                hasRisksOpps: true,
                 hasExamples: false,
-                hasQuestions: false
+                hasQuestions: false,
+                hasTrends: false,
+                risks: [
+                    'Data privacy and security breaches',
+                    'Algorithmic bias and unfairness',
+                    'Digital divide increasing student inequality',
+                    'Decreased human interaction & trainer mentorship',
+                    'Overdependence on technology',
+                    'Implementation and ongoing licensing costs',
+                    'Transparency, copyright, and IP issues',
+                    'Generic, hallucinated, or inaccurate content',
+                    'Academic integrity and authenticity risks',
+                    'Risks associated with not engaging with AI technology at all (falling behind industry)'
+                ],
+                opportunities: [
+                    'Creating administrative efficiencies across RTO operations',
+                    'Assisting with training and assessment content development',
+                    'Enhancing accessibility, inclusivity, and tailored student support',
+                    'Reflecting current workplace and industry standards',
+                    'Creating immersive and simulated learning experiences',
+                    'Enhancing performance-based assessment',
+                    'Making online training more engaging in real time',
+                    'Tracking student progress and identifying early support needs'
+                ]
             },
             {
                 id: 'p1',
@@ -389,20 +625,25 @@
                 title: 'Principle 1: AI use is supported by strong governance that ensures it does not undermine the quality or integrity of VET.',
                 description: `
                     <p class="mb-3 text-sm text-gray-700 leading-relaxed">AI must be used in ways that protect the quality and integrity of VET through strong provider governance, processes and controls that support compliant and reliable practices. Providers’ governance arrangements should ensure that:</p>
-                    <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1.5 mb-4">
                         <li>AI use is understood, managed and applied in a purposeful way</li>
                         <li>visibility of how AI is used in training and assessment practices is maintained</li>
                         <li>systems for identifying and responding to AI risks are implemented</li>
                         <li>AI adoption is carefully considered and incorporated into organisational processes without undermining the quality or integrity of VET delivery or outcomes.</li>
                     </ul>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs text-gray-700">
+                        <strong class="text-[#1f2a52]">Governance Practice Tip:</strong> Maintain an <em>RTO AI Use Register</em> documenting both standalone tools and embedded AI features in your LMS/SMS, recording the operational owner, purpose, affected training products, human review checkpoints, and risk controls.
+                    </div>
                 `,
-                meta: 'Quality Area 4 - Governance - Standard 4.1 | Compliance Requirements - Clause 9',
+                meta: '2025 Standards: Quality Area 4 (Governance - Standard 4.1) | Compliance Requirements - Clause 9',
+                hasRisksOpps: false,
                 hasExamples: true,
                 hasQuestions: true,
+                hasTrends: false,
                 examples: [
-                    { title: 'Academic Integrity Checks', text: 'If you suspect a group of students who struggled in face-to-face classes used AI to complete an unsupervised quiz with perfect scores, trigger your academic integrity policy. Use a secondary assessment method, like a verbal interview, to verify the evidence is authentic.' },
-                    { title: 'Clear AI Policies', text: 'Develop an Acceptable AI Use policy for both staff and students so everyone knows exactly what tools are approved and where the boundaries lie.' },
-                    { title: 'Risk Registers', text: 'Update your RTO risk register to specifically capture risks associated with AI adoption, including algorithmic bias and copyright infringement, detailing your mitigation strategies.' }
+                    { title: 'AI Use Register & Risk Controls', text: 'Update your RTO risk register and create a dedicated AI Use Register capturing every approved AI use case (including embedded LMS features), detailing algorithmic bias, copyright/IP controls, and human verification points.' },
+                    { title: 'Academic Integrity Checks', text: 'If a cohort of students who struggled in face-to-face classes submit an unsupervised written task with sophisticated phrasing not taught in class, trigger your academic integrity framework. Use a secondary verbal or video response to verify authenticity rather than immediately assuming misconduct.' },
+                    { title: 'Clear AI Policies & Boundaries', text: 'Develop an Acceptable AI Use Policy for both staff and students so everyone understands which tools are approved, how AI use must be disclosed, and where the boundaries lie.' }
                 ],
                 questions: [
                     { title: 'Responsibility & Accountability', text: 'Which roles will be responsible and accountable for how AI is used and overseen across your organisation? Do these individuals need to be upskilled in order to fulfill their responsibilities?' },
@@ -418,16 +659,21 @@
                 navLabel: 'Principle 2',
                 title: 'Principle 2: Human oversight and accountability is maintained in all AI supported activities, ensuring that decisions affecting students remain the responsibility of qualified trainers, assessors and staff.',
                 description: `
-                    <p class="text-sm text-gray-700 leading-relaxed mb-3">Providers must ensure that qualified trainers, assessors and staff retain full responsibility for decisions affecting students and apply active human oversight and professional judgement to all AI supported activities. AI must not replace human decision-making, evaluation or accountability.</p>
-                    <p class="text-sm text-gray-700 leading-relaxed">This means AI outputs are considered, reviewed and applied in context, rather than relied on without scrutiny. Staff remain responsible for determining the appropriateness, accuracy and relevance of AI supported processes and outcomes, particularly where decisions may impact student progression, assessment or support. Responsibility for decisions rests with qualified personnel, and the use of AI must not diminish professional accountability.</p>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-3">Providers must ensure that qualified trainers, assessors and staff retain full responsibility for decisions affecting students and apply active human oversight and professional judgement to all AI supported activities. <strong>AI must not replace human decision-making, evaluation or accountability.</strong></p>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-4">This means AI outputs are considered, reviewed and applied in context, rather than relied on without scrutiny. Staff remain responsible for determining the appropriateness, accuracy and relevance of AI supported processes and outcomes, particularly where decisions may impact student progression, assessment or support. Responsibility for decisions rests with qualified personnel, and the use of AI must not diminish professional accountability.</p>
+                    <div class="bg-[#fdf2f8] p-3.5 rounded-xl border-l-4 border-[#e72582] text-xs text-gray-700">
+                        <strong class="text-[#e72582]">Key Guardrail:</strong> AI can draft, recommend, classify, or flag—but the credentialed trainer or assessor must review the source evidence in context, exercise professional judgement, and own the final competency decision.
+                    </div>
                 `,
-                meta: 'Quality Area 1 (Standard 1.4) | Quality Area 3 (Standards 3.2, 3.3) | Quality Area 4 (Standard 4.2)',
+                meta: '2025 Standards: Quality Area 1 (Standard 1.4) | Quality Area 3 (Standards 3.2, 3.3) | Quality Area 4 (Standard 4.2)',
+                hasRisksOpps: false,
                 hasExamples: true,
                 hasQuestions: true,
+                hasTrends: false,
                 examples: [
-                    { title: 'Timestamp Video Evidence', text: 'Use AI to map key actions in a video against a rubric. The assessor must then review the actual footage properly (not just speed through it) to make the final, valid competency call.' },
-                    { title: 'Verify Authenticity', text: 'If an AI cheating detector flags a student\'s work as AI-generated, a human assessor must step in. Use verbal questioning to confirm the student\'s knowledge and ensure the evidence is authentic before making an outcome decision.' },
-                    { title: 'Validate AI Content', text: 'If using AI to generate a lesson plan or quiz, a qualified trainer must review the material to ensure it is accurate, current, and aligned to the training package before delivering it.' }
+                    { title: 'Timestamp Video Evidence', text: 'Use AI to transcribe or map key actions in practical video evidence against a rubric. The qualified assessor must still review the actual footage properly to make the final, valid competency judgement.' },
+                    { title: 'Human Verification of AI Flagged Work', text: 'If an AI detection tool flags a student’s submission as likely AI-generated, do not rely solely on the detector score. A qualified assessor must intervene and conduct a structured verbal or video questioning session to verify authentic understanding.' },
+                    { title: 'Validate AI-Drafted Learning Materials', text: 'If using generative AI to draft a lesson plan, case scenario, or quiz, a qualified subject matter expert and trainer must review, tailor, and validate the material against the training product requirements before use.' }
                 ],
                 questions: [
                     { title: 'Staff Understanding', text: 'Do your staff have sufficient understanding of your organisation’s policies on AI use to apply them in their day-to-day role? For example, would your staff recognise when AI outputs are incomplete, inaccurate or not fit-for-purpose?' },
@@ -443,15 +689,20 @@
                 title: 'Principle 3: AI systems and tools manage information securely and in accordance with existing privacy, data protection and record keeping obligations.',
                 description: `
                     <p class="mb-3 text-sm text-gray-700 leading-relaxed">AI must be used lawfully and in accordance with providers’ privacy, security and data-handling obligations. This includes understanding how AI systems and tools collect, use, store and share information, and ensuring that their use does not result in the inappropriate disclosure or misuse of personal or organisational data.</p>
-                    <p class="text-sm text-gray-700 leading-relaxed">Where an off-the-shelf AI tool or system is being used, providers remain responsible for undertaking due diligence to ensure student privacy and security is able to be maintained.</p>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-4">Where an off-the-shelf AI tool or system is being used, providers remain responsible for undertaking due diligence to ensure student privacy and security is able to be maintained.</p>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs text-gray-700">
+                        <strong class="text-[#1f2a52]">Due Diligence Check:</strong> Audit inbuilt AI features newly activated within your existing Student Management System (SMS) or Learning Management System (LMS) to verify data sovereignty (onshore vs offshore storage) and model-training opt-outs.
+                    </div>
                 `,
-                meta: 'Quality Area 4 - Governance - Standards 4.1 and 4.3 | Compliance Requirements - Clause 20',
+                meta: '2025 Standards: Quality Area 4 (Governance - Standards 4.1 & 4.3) | Compliance Requirements - Clause 20',
+                hasRisksOpps: false,
                 hasExamples: true,
                 hasQuestions: true,
+                hasTrends: false,
                 examples: [
-                    { title: 'Strip Personal Data (Public AI)', text: 'If using free or public AI tools, remove all identifying student info before analysing feedback or drafting plans. Keep data handling valid and private.' },
-                    { title: 'Enterprise Licenses & Privacy Caveats', text: 'While enterprise/educational AI licenses (like Copilot or Gemini) ring-fence your data so it isn\'t used to train public models, Australian Privacy Principles (APPs) still apply.<br><br><span class="font-bold">Data Minimisation:</span> Only process necessary personal info. If grouping survey themes, AI doesn\'t need student names.<br><span class="font-bold">Data Sovereignty:</span> You still need to ensure you know where that enterprise data is stored (onshore vs offshore) and that this aligns with your RTO\'s privacy policy.' },
-                    { title: 'Get Clear Consent', text: 'Update enrolment terms to get explicit consent on how third-party cloud tools and AI interact with student data. Keep your processes transparent and fair.' }
+                    { title: 'Strip Personal Data (Public AI)', text: 'Never enter personally identifiable student information (names, USIs, LLN assessments, medical notes) into public or free AI tools. Anonymise and aggregate data before analysing feedback trends.' },
+                    { title: 'Enterprise Licenses & Australian Privacy Principles', text: 'While enterprise AI licenses (such as Microsoft Copilot or Google Gemini for Workspace) ring-fence organisational data from training public models, Australian Privacy Principles (APPs) still apply:<br><br><span class="font-bold">Data Minimisation:</span> Only process personal info when strictly necessary.<br><span class="font-bold">Data Sovereignty:</span> Verify whether data is processed and stored onshore in Australia or offshore, ensuring alignment with your RTO Privacy Policy.' },
+                    { title: 'Informed Written Student Consent', text: 'Update enrolment forms and privacy disclosures to clearly explain how AI-enabled platforms (such as identity-verified video assessment tools or AI tutors) process student data, obtaining prior written consent.' }
                 ],
                 questions: [
                     { title: 'System Capabilities & Risk', text: 'Does your Student Management System and/or Learner Management System have inbuilt AI capabilities? If so, what are the risks associated with this and how will they be managed? For example, have you considered data sovereignty and if data is stored onshore or offshore?' },
@@ -467,15 +718,20 @@
                 title: 'Principle 4: AI use supports and enhances student equity, inclusivity, accessibility and wellbeing.',
                 description: `
                     <p class="text-sm text-gray-700 leading-relaxed mb-3">Providers must ensure that their AI use is fair and transparent, and does not create barriers to equitable, inclusive and accessible learning experiences. This includes for students with diverse backgrounds, abilities, digital literacy levels and support needs.</p>
-                    <p class="text-sm text-gray-700 leading-relaxed">Providers need to consider how different students may experience and engage with AI supported activities, including their access to technology, confidence in using digital tools and ability to participate effectively. AI use should support participation, enhance accessibility and contribute to student wellbeing, rather than create additional complexity.</p>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-4">Providers need to consider how different students may experience and engage with AI supported activities, including their access to technology, confidence in using digital tools and ability to participate effectively. AI use should support participation, enhance accessibility and contribute to student wellbeing, rather than create additional complexity.</p>
+                    <div class="bg-[#d2f0f0]/50 p-3.5 rounded-xl border-l-4 border-[#00bec7] text-xs text-gray-700">
+                        <strong class="text-[#1f2a52]">Equity Reminder:</strong> If an assessment requires students to interact with an AI platform, ensure learners with lower digital confidence or assistive technology needs are given explicit scaffolding, guided prompts, or equitable alternative options.
+                    </div>
                 `,
-                meta: 'Quality Area 2 - VET student support - Standards 2.2 to 2.6',
+                meta: '2025 Standards: Quality Area 2 (VET Student Support - Standards 2.2 to 2.6)',
+                hasRisksOpps: false,
                 hasExamples: true,
                 hasQuestions: true,
+                hasTrends: false,
                 examples: [
-                    { title: 'Adapt Learning Pathways', text: 'Use AI to simplify complex language in learner guides for students with lower LLN levels, keeping support accessible and flexible.' },
-                    { title: 'Live Accessibility Tools', text: 'Provide AI live-captioning and translation during virtual classes to actively support CALD or hearing-impaired learners.' },
-                    { title: 'Flexible Assessment Options', text: 'Allow neurodivergent students to use AI speech-to-text tools to demonstrate their knowledge effectively.' }
+                    { title: 'Adapt Learning Pathways for LLN Needs', text: 'Use AI to create plain-English summaries or glossary explanations alongside technical learner guides for students with lower Language, Literacy, and Numeracy (LLN) levels.' },
+                    { title: 'Live Accessibility & Multilingual Support', text: 'Provide AI-powered live captioning, screen-reader friendly formats, and translation assistance during webinars to support CALD or hearing-impaired learners.' },
+                    { title: 'Equitable Alternatives & Scaffolding', text: 'When introducing AI tools in class, provide guided prompt templates and alternative pathways so students with low digital literacy or no paid AI subscriptions are not disadvantaged.' }
                 ],
                 questions: [
                     { title: 'Engagement & Participation', text: 'How might your AI systems and tools affect student engagement and participation, both positively and negatively?' },
@@ -492,21 +748,72 @@
                 title: 'Principle 5: AI use aligns with training product requirements, industry expectations and the needs of the relevant student cohort.',
                 description: `
                     <p class="text-sm text-gray-700 leading-relaxed mb-3">AI use must not compromise the requirements of the training product, including the conditions under which competency is to be achieved and demonstrated.</p>
-                    <p class="text-sm text-gray-700 leading-relaxed">AI use must be suitable for the student cohort and context, supporting learning and participation without undermining the development and demonstration of required skills and knowledge. All training product requirements must be met where AI is used, regardless of whether AI is explicitly referenced in the training product. AI use should also reflect industry and workplace expectations.</p>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-4">AI use must be suitable for the student cohort and context, supporting learning and participation without undermining the development and demonstration of required skills and knowledge. <strong>All training product requirements must be met where AI is used, regardless of whether AI is explicitly referenced in the training product.</strong> AI use should also reflect industry and workplace expectations.</p>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs text-gray-700">
+                        <strong class="text-[#1f2a52]">Training Product Integrity:</strong> AI tools must never replace trainer-led instruction or allow a student to bypass demonstrating the core cognitive or practical skills specified in the unit’s Performance Evidence and Knowledge Evidence.
+                    </div>
                 `,
-                meta: 'Quality Area 1 (Standards 1.1, 1.2, 1.3) | Quality Area 2 (Standard 2.2) | 2025 Standards for RTOs',
+                meta: '2025 Standards: Quality Area 1 (Training & Assessment - Standards 1.1, 1.2, 1.3) | Quality Area 2 (Standard 2.2)',
+                hasRisksOpps: false,
                 hasExamples: true,
                 hasQuestions: true,
+                hasTrends: false,
                 examples: [
-                    { title: 'Teach Industry-Standard Tools', text: 'Integrate the specific AI tools used in your industry sector so graduates enter the workforce with current, relevant skills.' },
-                    { title: 'Dynamic Role-Plays', text: 'Generate realistic, varied workplace scenarios using AI to boost the authenticity of simulation assessments.' },
-                    { title: 'Draft Unit Mapping', text: 'Use AI to draft preliminary mapping matrices, ensuring an assessor verifies that all unit requirements are valid and fully satisfied.' }
+                    { title: 'Balance Industry AI Tools with Explicit Teaching', text: 'Integrate workplace AI tools relevant to your industry sector, but ensure trainers still explicitly model how an experienced practitioner critiques, verifies, and refines automated outputs.' },
+                    { title: 'Dynamic Workplace Simulations', text: 'Use generative AI to create varied, realistic customer queries or fault-finding scenarios while requiring students to apply and justify their own problem-solving decisions.' },
+                    { title: 'Protecting Foundational Competency', text: 'Clearly identify which assessment tasks or foundational skills cannot be conducted using AI (for example, where the unit requires independent calculation, critical reasoning, or hands-on physical performance).' }
                 ],
                 questions: [
                     { title: 'Skill Development', text: 'How will you ensure your use of AI supports, and does not dilute, students’ development of skills and knowledge as required by the training product?' },
                     { title: 'Industry Currency', text: 'How will you keep pace with industry’s adoption of AI in relation to the courses you have on scope? What professional development will your trainers and assessors need to maintain industry currency?' },
                     { title: 'Assessment Suitability', text: 'What existing training and assessment practices need to be maintained or are not suitable to be conducted using AI?' }
                 ]
+            },
+            {
+                id: 'cases',
+                iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>',
+                navLabel: 'Case Studies',
+                title: 'Official ASQA AI Case Studies & Regulatory Insights',
+                description: `
+                    <p class="text-sm text-gray-700 leading-relaxed mb-3">Alongside the 5 Principles, ASQA published official VET case studies and <em>ASQA IQ</em> insights showing how providers manage assessment integrity, instructional balance, and inclusivity when using AI.</p>
+                    
+                    <!-- Interactive Case Study Switcher -->
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <button type="button" onclick="switchCaseStudy(1)" id="case-tab-1" class="case-tab-btn active">
+                            Case Study 1: BSBCRT411 (Assessment Integrity)
+                        </button>
+                        <button type="button" onclick="switchCaseStudy(2)" id="case-tab-2" class="case-tab-btn">
+                            Case Study 2: BSBMKG433 (Inclusive Training & Design)
+                        </button>
+                    </div>
+
+                    <!-- Case Study 1 Content -->
+                    <div id="case-panel-1" class="bg-[#f8fafc] p-4 rounded-xl border border-[#d2f0f0] text-xs md:text-sm text-gray-700 space-y-2.5">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <h4 class="font-bold text-[#1f2a52] text-sm md:text-base">Case Study 1: Ensuring integrity in AI-supported assessment</h4>
+                            <span class="bg-[#e72582]/10 text-[#e72582] px-2.5 py-0.5 rounded-full text-xs font-bold">BSBCRT411 Apply critical thinking to work practices</span>
+                        </div>
+                        <p><strong>The Scenario:</strong> A student submitted a written assessment using advanced language and reasoning frameworks not covered in class. An AI detector flagged it. When asked, the student explained they used AI to refine their draft and sentence structure, stating the ideas were their own but admitting uncertainty around permitted AI use.</p>
+                        <p><strong>The RTO’s Response:</strong> Because <em>BSBCRT411</em> assesses analysing, evaluating, and justifying thinking processes, written evidence alone was insufficient to verify authenticity. Rather than immediately treating it as misconduct, the assessor asked the student to submit an <strong>identity-verified video response</strong> explaining the workplace problem, how they evaluated options, and justifying their solution.</p>
+                        <p><strong>The Outcome:</strong> While less sophisticated than the written essay, the student's verbal explanation clearly demonstrated competency. The RTO updated its assessments to include clear AI boundary instructions, multimodal/verbal verification, and AI literacy support.</p>
+                    </div>
+
+                    <!-- Case Study 2 Content (Hidden by default) -->
+                    <div id="case-panel-2" class="bg-[#f8fafc] p-4 rounded-xl border border-[#d2f0f0] text-xs md:text-sm text-gray-700 space-y-2.5" style="display: none;">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <h4 class="font-bold text-[#1f2a52] text-sm md:text-base">Case Study 2: Supporting inclusive and effective use of AI</h4>
+                            <span class="bg-[#00bec7]/15 text-[#1f2a52] px-2.5 py-0.5 rounded-full text-xs font-bold">BSBMKG433 Undertake marketing activities</span>
+                        </div>
+                        <p><strong>The Scenario:</strong> An RTO introduced an AI campaign tool to generate analytics, audience profiles, and draft social posts. Over time, AI outputs began replacing trainer-led demonstrations. When the tool was embedded into an assessment task, students with lower digital confidence or accessibility needs struggled to navigate the platform and interpret outputs.</p>
+                        <p><strong>The RTO’s Response:</strong> The RTO repositioned the AI tool as a support resource rather than primary instruction. Trainers reintroduced explicit teaching to model how to question AI analytics, spot gaps in audience profiles, and refine content using professional judgement.</p>
+                        <p><strong>The Outcome:</strong> The assessment was redesigned with equitable options—allowing students to analyse provided campaign materials, use guided prompt templates, and briefly explain how they adapted any AI outputs. This balanced industry innovation with equitable access.</p>
+                    </div>
+                `,
+                meta: 'Source: ASQA Artificial Intelligence (AI) Case Studies & ASQA IQ',
+                hasRisksOpps: false,
+                hasExamples: false,
+                hasQuestions: false,
+                hasTrends: true
             }
         ];
 
@@ -515,8 +822,14 @@
         const boxTitle = document.getElementById('box-title');
         const boxDescription = document.getElementById('box-description');
         const boxMeta = document.getElementById('box-meta');
+        const progressPill = document.getElementById('progress-pill');
+
+        const btnRisksOpps = document.getElementById('btn-risks-opps');
         const btnExamples = document.getElementById('btn-examples');
         const btnQuestions = document.getElementById('btn-questions');
+        const btnAsqaTrends = document.getElementById('btn-asqa-trends');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
         
         const modal = document.getElementById('interactive-modal');
         const btnCloseModal = document.getElementById('btn-close-modal');
@@ -524,71 +837,153 @@
         const modalSubtitle = document.getElementById('modal-subtitle');
         const modalBody = document.getElementById('modal-body');
 
-        let currentActiveData = null;
+        let currentActiveIndex = 0;
+        const visitedIds = new Set(['start']);
+        const checkedQuestions = new Set();
 
         // Initialize Navigation
         function initNav() {
-            principlesData.forEach((item) => {
-                const btn = document.createElement('div');
-                btn.className = `circle-btn ${item.id === 'start' ? 'active' : ''}`;
+            principlesData.forEach((item, index) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `circle-btn ${item.id === 'start' ? 'active visited' : ''}`;
                 btn.dataset.id = item.id;
+                btn.dataset.index = index;
+                btn.setAttribute('aria-label', item.navLabel);
                 
                 btn.innerHTML = `
+                    <span class="visited-badge" title="Explored">✓</span>
                     ${item.iconSvg}
                     <span class="label">${item.navLabel}</span>
                 `;
                 
                 btn.addEventListener('click', () => {
-                    document.querySelectorAll('.circle-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    updateContent(item.id);
+                    selectSection(index);
                 });
 
                 navContainer.appendChild(btn);
             });
             
-            updateContent('start');
+            updateContent(0);
+        }
+
+        function selectSection(index) {
+            if (index < 0 || index >= principlesData.length) return;
+            currentActiveIndex = index;
+            const targetId = principlesData[index].id;
+            visitedIds.add(targetId);
+
+            document.querySelectorAll('.circle-btn').forEach((b, idx) => {
+                b.classList.toggle('active', idx === index);
+                if (visitedIds.has(b.dataset.id)) {
+                    b.classList.add('visited');
+                }
+            });
+
+            progressPill.textContent = `${visitedIds.size} of ${principlesData.length} Explored`;
+            updateContent(index);
         }
 
         // Update Information Display
-        function updateContent(id) {
-            const data = principlesData.find(p => p.id === id);
-            currentActiveData = data;
+        function updateContent(index) {
+            const data = principlesData[index];
 
             boxIconContainer.style.opacity = 0;
             boxTitle.style.opacity = 0;
             boxDescription.style.opacity = 0;
             boxMeta.style.opacity = 0;
             
+            btnPrev.disabled = index === 0;
+            btnNext.disabled = index === principlesData.length - 1;
+
             setTimeout(() => {
-                const mainIcon = data.iconSvg.replace('class="nav-icon"', 'width="28" height="28"');
+                const mainIcon = data.iconSvg.replace('class="nav-icon"', 'width="26" height="26"');
                 boxIconContainer.innerHTML = mainIcon;
                 
                 boxTitle.innerHTML = data.title;
                 boxDescription.innerHTML = data.description;
-                boxMeta.innerHTML = data.meta;
+                boxMeta.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1f2a52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    <span>${data.meta}</span>
+                `;
                 
+                btnRisksOpps.style.display = data.hasRisksOpps ? 'inline-flex' : 'none';
                 btnExamples.style.display = data.hasExamples ? 'inline-flex' : 'none';
                 btnQuestions.style.display = data.hasQuestions ? 'inline-flex' : 'none';
+                btnAsqaTrends.style.display = data.hasTrends ? 'inline-flex' : 'none';
 
-                boxIconContainer.style.transition = 'opacity 0.25s ease';
-                boxTitle.style.transition = 'opacity 0.25s ease';
-                boxDescription.style.transition = 'opacity 0.25s ease';
-                boxMeta.style.transition = 'opacity 0.25s ease';
+                boxIconContainer.style.transition = 'opacity 0.2s ease';
+                boxTitle.style.transition = 'opacity 0.2s ease';
+                boxDescription.style.transition = 'opacity 0.2s ease';
+                boxMeta.style.transition = 'opacity 0.2s ease';
                 
                 boxIconContainer.style.opacity = 1;
                 boxTitle.style.opacity = 1;
                 boxDescription.style.opacity = 1;
                 boxMeta.style.opacity = 1;
-            }, 120);
+            }, 100);
+        }
+
+        // Switch Tabs inside Case Studies View
+        window.switchCaseStudy = function(caseNumber) {
+            const tab1 = document.getElementById('case-tab-1');
+            const tab2 = document.getElementById('case-tab-2');
+            const panel1 = document.getElementById('case-panel-1');
+            const panel2 = document.getElementById('case-panel-2');
+
+            if (!tab1 || !tab2 || !panel1 || !panel2) return;
+
+            if (caseNumber === 1) {
+                tab1.classList.add('active');
+                tab2.classList.remove('active');
+                panel1.style.display = 'block';
+                panel2.style.display = 'none';
+            } else {
+                tab2.classList.add('active');
+                tab1.classList.remove('active');
+                panel2.style.display = 'block';
+                panel1.style.display = 'none';
+            }
+        };
+
+        // Open Modal for ASQA Official Risks & Opportunities
+        function openRisksOppsModal() {
+            const data = principlesData[0];
+            modalTitle.textContent = 'AI in VET: Official Risks & Opportunities';
+            modalSubtitle.textContent = 'ASQA identified key risks and opportunities for providers adopting AI systems';
+
+            modalBody.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-[#fdf2f8] p-4 rounded-xl border border-[#fbcfe8]">
+                        <h4 class="font-bold text-[#e72582] text-base mb-3 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            Key Risks to Manage
+                        </h4>
+                        <ul class="space-y-2 text-xs md:text-sm text-gray-700">
+                            ${data.risks.map(r => `<li class="flex items-start gap-2"><span class="text-[#e72582] font-bold">•</span><span>${r}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="bg-[#f0fdfa] p-4 rounded-xl border border-[#99f6e4]">
+                        <h4 class="font-bold text-[#008b94] text-base mb-3 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Key Opportunities in VET
+                        </h4>
+                        <ul class="space-y-2 text-xs md:text-sm text-gray-700">
+                            ${data.opportunities.map(o => `<li class="flex items-start gap-2"><span class="text-[#00bec7] font-bold">•</span><span>${o}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            modal.classList.add('show');
         }
 
         // Open Modal for Examples
         function openExamplesModal() {
-            if(!currentActiveData || !currentActiveData.examples) return;
+            const currentActiveData = principlesData[currentActiveIndex];
+            if (!currentActiveData || !currentActiveData.examples) return;
 
-            modalTitle.textContent = currentActiveData.title + ' — Examples';
-            modalSubtitle.textContent = 'Practical application and scenarios in RTO environments';
+            modalTitle.textContent = currentActiveData.navLabel + ' — Practical RTO Examples';
+            modalSubtitle.textContent = 'Practical application and compliance scenarios in RTO environments';
             
             modalBody.innerHTML = currentActiveData.examples.map(ex => `
                 <div class="item-card">
@@ -605,25 +1000,85 @@
             modal.classList.add('show');
         }
 
-        // Open Modal for Self-Assurance Questions
+        // Open Modal for Self-Assurance Questions (with interactive checklist capability)
         function openQuestionsModal() {
-            if(!currentActiveData || !currentActiveData.questions) return;
+            const currentActiveData = principlesData[currentActiveIndex];
+            if (!currentActiveData || !currentActiveData.questions) return;
 
-            modalTitle.textContent = currentActiveData.title + ' — Self-Assurance';
-            modalSubtitle.textContent = 'ASQA audit evaluation & self-assurance questions';
+            modalTitle.textContent = currentActiveData.navLabel + ' — Self-Assurance Questions';
+            modalSubtitle.textContent = 'Official ASQA self-assurance questions (click any question to check it off during your review)';
             
-            modalBody.innerHTML = currentActiveData.questions.map(q => `
-                <div class="item-card question-card">
+            renderQuestionsList(currentActiveData);
+            modal.classList.add('show');
+        }
+
+        function renderQuestionsList(currentActiveData) {
+            modalBody.innerHTML = currentActiveData.questions.map((q, idx) => {
+                const key = `${currentActiveData.id}-q-${idx}`;
+                const isChecked = checkedQuestions.has(key);
+                return `
+                    <div class="item-card question-card ${isChecked ? 'checked' : ''}" onclick="toggleQuestionCheck('${key}')">
+                        <div class="item-icon ${isChecked ? '' : 'question-icon'}">
+                            ${isChecked 
+                                ? '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00bec7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>'
+                                : '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
+                            }
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center justify-between">
+                                <h4 class="item-title">${q.title}</h4>
+                                <span class="text-[11px] font-semibold ${isChecked ? 'text-[#00bec7]' : 'text-gray-400'}">${isChecked ? 'Reviewed ✓' : 'Click to mark'}</span>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">${q.text}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.toggleQuestionCheck = function(key) {
+            if (checkedQuestions.has(key)) {
+                checkedQuestions.delete(key);
+            } else {
+                checkedQuestions.add(key);
+            }
+            renderQuestionsList(principlesData[currentActiveIndex]);
+        };
+
+        // Open Modal for ASQA IQ Trends in Applications & Responses
+        function openTrendsModal() {
+            modalTitle.textContent = 'ASQA IQ: Observed AI Trends';
+            modalSubtitle.textContent = 'Key regulatory observations on how providers use AI when interacting with ASQA';
+
+            modalBody.innerHTML = `
+                <div class="item-card">
                     <div class="item-icon question-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                     </div>
                     <div>
-                        <h4 class="item-title">${q.title}</h4>
-                        <p class="text-sm text-gray-700 leading-relaxed">${q.text}</p>
+                        <h4 class="item-title">Generic AI-Generated Submissions to ASQA</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">In <em>ASQA IQ</em>, ASQA highlighted an increase in providers using generative AI to draft registration applications, change-of-scope submissions, and responses to non-compliance notices. Submissions that rely on generic, unverified AI outputs often fail to reflect the RTO’s actual operations, specific student cohort, or genuine self-assurance evidence.</p>
                     </div>
                 </div>
-            `).join('');
-
+                <div class="item-card">
+                    <div class="item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div>
+                        <h4 class="item-title">Evidence Must Reflect Real Organisational Practice</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">While AI can assist with structuring or editing policies, CEOs and governing persons remain accountable for ensuring all policies, plans, and regulatory responses submitted to ASQA are tailored, accurate, and backed by genuine operational evidence.</p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="item-title">ASQA’s Own AI Transparency Commitment</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">Under ASQA’s <em>AI Transparency Statement</em>, ASQA uses AI internally for workplace productivity (such as document summarisation) and analytics insights, while maintaining strict human oversight on all regulatory decisions.</p>
+                    </div>
+                </div>
+            `;
             modal.classList.add('show');
         }
 
@@ -632,12 +1087,23 @@
         }
 
         // Event Listeners
+        btnRisksOpps.addEventListener('click', openRisksOppsModal);
         btnExamples.addEventListener('click', openExamplesModal);
         btnQuestions.addEventListener('click', openQuestionsModal);
+        btnAsqaTrends.addEventListener('click', openTrendsModal);
         btnCloseModal.addEventListener('click', closeModal);
+
+        btnPrev.addEventListener('click', () => selectSection(currentActiveIndex - 1));
+        btnNext.addEventListener('click', () => selectSection(currentActiveIndex + 1));
         
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
         });
 
         document.addEventListener('DOMContentLoaded', initNav);
